@@ -1,0 +1,121 @@
+package com.example.libalertbox
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.fragment_alert_dialog.*
+import kotlinx.android.synthetic.main.fragment_alert_dialog.view.*
+
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1="param1"
+private const val ARG_PARAM2="param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [AlertDialogFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class AlertDialogFragment : Fragment() {
+
+    var displayName: String?=""
+    var displayEmail: String?=""
+    var displayPass: String?=""
+
+
+    // TODO: Rename and change types of parameters
+    private var param1: String?=null
+    private var param2: String?=null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1=it.getString(ARG_PARAM1)
+            param2=it.getString(ARG_PARAM2)
+
+
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        // Inflate the layout for this fragment
+        val view=inflater.inflate(R.layout.fragment_alert_dialog, container, false)
+
+
+
+        displayName=arguments?.getString("Name")
+        displayEmail=arguments?.getString("Email")
+        displayPass=arguments?.getString("Password")
+        view.name1.text=displayName
+        view.Email1.text=displayEmail
+        view.Pass1.text=displayPass
+
+
+
+        val builder=AlertDialog.Builder(this.requireContext())
+
+        builder.setTitle("Application Exit")
+
+        builder.setIcon(R.drawable.ic_action_warning)
+
+        builder.setMessage("Are you Sure, You want to exit?")
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+
+
+            Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
+
+
+        }
+
+        builder.setNegativeButton("No") { dialog, which ->
+
+            Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
+
+        }
+
+        builder.setNeutralButton("Cancel") { dialog, which ->
+
+            Toast.makeText(this.context, "www.ruchirabandara.com", Toast.LENGTH_LONG).show()
+
+        }
+
+        val dialog: AlertDialog=builder.create()
+
+        dialog.show()
+
+
+
+        return view
+    }
+
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment AlertDialogFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String)=
+            AlertDialogFragment().apply {
+                arguments=Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}
