@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_custom_dialog_box.*
 
 
 import kotlinx.android.synthetic.main.fragment_custom_dialog_box.view.*
+import kotlin.system.exitProcess
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,7 +69,7 @@ class CustomDialogBoxFragment : Fragment() {
 
 
 
-        datacomminication=activity as DataComminication
+        datacomminication = activity as DataComminication
 
         dialog.DialogLogin.setOnClickListener {
 
@@ -88,7 +89,7 @@ class CustomDialogBoxFragment : Fragment() {
         }
 
         dialog.DialogCancel.setOnClickListener {
-            mAlertDialog.dismiss()
+            exitProcess(-1)
         }
 
 

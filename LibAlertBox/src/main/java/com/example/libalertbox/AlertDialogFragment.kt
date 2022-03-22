@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.fragment_alert_dialog.*
 import kotlinx.android.synthetic.main.fragment_alert_dialog.view.*
+import kotlin.system.exitProcess
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +30,9 @@ class AlertDialogFragment : Fragment() {
     var displayPass: String?=""
 
 
+
+
+
     // TODO: Rename and change types of parameters
     private var param1: String?=null
     private var param2: String?=null
@@ -38,6 +43,9 @@ class AlertDialogFragment : Fragment() {
         arguments?.let {
             param1=it.getString(ARG_PARAM1)
             param2=it.getString(ARG_PARAM2)
+
+
+
 
 
         }
@@ -52,50 +60,57 @@ class AlertDialogFragment : Fragment() {
 
 
 
+        val alertView = view.findViewById<Button>(R.id.btnAlert)
+
         displayName=arguments?.getString("Name")
         displayEmail=arguments?.getString("Email")
         displayPass=arguments?.getString("Password")
-        view.name1.text=displayName
-        view.Email1.text=displayEmail
-        view.Pass1.text=displayPass
+
+        view.name1.text= "Name : "+ displayName
+        view.Email1.text= "Email : "+ displayEmail
+        view.Pass1.text="Password : "+ displayPass
+
+        alertView.setOnClickListener {
+            val builder=AlertDialog.Builder(this.requireContext())
+
+            builder.setTitle("Application Exit")
+
+            builder.setIcon(R.drawable.ic_action_warning)
+
+            builder.setMessage("Are you Sure, You want to exit?")
+
+            builder.setPositiveButton("Yes") { dialog, which ->
 
 
+                exitProcess(-1)
 
-        val builder=AlertDialog.Builder(this.requireContext())
-
-        builder.setTitle("Application Exit")
-
-        builder.setIcon(R.drawable.ic_action_warning)
-
-        builder.setMessage("Are you Sure, You want to exit?")
-
-        builder.setPositiveButton("Yes") { dialog, which ->
+                Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
 
 
-            Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
+            }
 
+            builder.setNegativeButton("No") { dialog, which ->
+
+                Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
+
+            }
+
+            builder.setNeutralButton("Cancel") { dialog, which ->
+
+                Toast.makeText(this.context, "www.ruchirabandara.com", Toast.LENGTH_LONG).show()
+
+            }
+
+            val dialog: AlertDialog=builder.create()
+
+            dialog.show()
 
         }
-
-        builder.setNegativeButton("No") { dialog, which ->
-
-            Toast.makeText(this.context, "Your are back", Toast.LENGTH_LONG).show()
-
-        }
-
-        builder.setNeutralButton("Cancel") { dialog, which ->
-
-            Toast.makeText(this.context, "www.ruchirabandara.com", Toast.LENGTH_LONG).show()
-
-        }
-
-        val dialog: AlertDialog=builder.create()
-
-        dialog.show()
-
-
-
         return view
+
+
+
+
     }
 
 
